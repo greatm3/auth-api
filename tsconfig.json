@@ -2,8 +2,8 @@
   "compilerOptions": { 
     "rootDir": "./src",
     "outDir": "./dist",
-    "module": "nodenext",
-    "target": "esnext",
+    "module": "esnext",
+    "target": "es2017",
     "types": ["node", "express", "bcrypt", "jsonwebtoken"],
   
     "sourceMap": true,
@@ -20,6 +20,9 @@
     "noUncheckedSideEffectImports": true,
     "moduleDetection": "force",
     "skipLibCheck": true,
+    "allowImportingTsExtensions": true,
+    "emitDeclarationOnly": true,
+    "allowSyntheticDefaultImports": true
   },
   "include": ["src"],
   "exclude": ["node_modules", "dist"]
