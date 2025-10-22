@@ -1,4 +1,4 @@
-import express from "express";
+import express, { type Request, type Response } from "express";
 import dotenv from "dotenv"
 import database from "./db.ts"
 
@@ -11,9 +11,11 @@ app.use(express.json())
 
 const client = await database.connect()
 
-const response = await client.query("SELECT NOW()")
+const response = await client.query("SELECT NOW()") 
 
-console.log(response.rows[0].now)
+app.get("/now", (req: Request, res: Response) => {
+    res.status(200).json(response.rows)
+})
 
 app.listen(process.env.APP_PORT, () => {
     console.log('app started @', process.env.APP_PORT);
