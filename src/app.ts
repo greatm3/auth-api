@@ -1,4 +1,5 @@
 import express, { type Request, type Response } from 'express';
+import { authRouter } from './routes/auth.route';
 import dotenv from 'dotenv'; 
 
 dotenv.config({
@@ -7,6 +8,8 @@ dotenv.config({
 
 const app = express();
 app.use(express.json());
+
+app.use('/api/auth', authRouter)
 
 app.listen(process.env.APP_PORT, () => {
     console.log('app started @', process.env.APP_PORT);
