@@ -2,19 +2,19 @@
   "compilerOptions": { 
     "rootDir": "./src",
     "outDir": "./dist",
-    "module": "commonjs",           // ← Changed
+    "module": "commonjs",           
     "target": "es2017",
-    "types": ["node"],               // ← Simplified (others auto-detected)
+    "types": ["node"],               
   
     "sourceMap": true,
     "declaration": true,
     "declarationMap": true,
     
     "strict": true,
-    "esModuleInterop": true,         // ← Added (helps with imports)
+    "esModuleInterop": true,          
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
-    "resolveJsonModule": true        // ← Added (if you import JSON)
+    "resolveJsonModule": true       
   },
   "include": ["src"],
   "exclude": ["node_modules", "dist"]
