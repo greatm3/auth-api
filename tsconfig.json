@@ -2,27 +2,19 @@
   "compilerOptions": { 
     "rootDir": "./src",
     "outDir": "./dist",
-    "module": "esnext",
+    "module": "commonjs",           // ← Changed
     "target": "es2017",
-    "types": ["node", "express", "bcrypt", "jsonwebtoken"],
+    "types": ["node"],               // ← Simplified (others auto-detected)
   
     "sourceMap": true,
     "declaration": true,
     "declarationMap": true,
     
-    "noUncheckedIndexedAccess": true,
-    "exactOptionalPropertyTypes": true,
-    
     "strict": true,
-    "jsx": "react-jsx",
-    "verbatimModuleSyntax": true,
-    "isolatedModules": true,
-    "noUncheckedSideEffectImports": true,
-    "moduleDetection": "force",
+    "esModuleInterop": true,         // ← Added (helps with imports)
     "skipLibCheck": true,
-    "allowImportingTsExtensions": true,
-    "emitDeclarationOnly": true,
-    "allowSyntheticDefaultImports": true
+    "forceConsistentCasingInFileNames": true,
+    "resolveJsonModule": true        // ← Added (if you import JSON)
   },
   "include": ["src"],
   "exclude": ["node_modules", "dist"]
