@@ -7,7 +7,8 @@
     "dev": "nodemon src/app.ts",
     "build": "tsc",
     "start": "node dist/app.js",
-    "migrate:ts": "ts-node src/scripts/migrate.ts"
+    "migrate:ts": "ts-node src/scripts/migrate.ts",
+    "migrate:js": "node dist/scripts/migrate.js"
   },
   "repository": {
     "type": "git",
