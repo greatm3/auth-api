@@ -12,6 +12,6 @@ const dbConfig: PoolConfig = {
     database: process.env.DATABASE_NAME
 }
 
-const pool = new Pool(dbConfig)
+const appPool = new Pool(dbConfig)
 
-export default pool
+export default appPool
