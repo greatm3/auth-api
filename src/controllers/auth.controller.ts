@@ -1,7 +1,7 @@
 import { type Request, type Response } from 'express';
 import { validatePostRequest } from '../utils/validation.util';
 
-function register(req: Request, res: Response) {
+async function register(req: Request, res: Response) {
     if (!req.body || Object.entries(req.body).length === 0) {
         return res
             .status(400)
