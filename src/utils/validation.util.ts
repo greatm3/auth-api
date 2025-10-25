@@ -1,18 +1,7 @@
 import * as zod from 'zod';
 
-interface ValidationReturnSuccess {
-    success: true
-    data: Record<string, unknown>
-}
 
-interface ValidationReturnError {
-    success: false
-    message: string
-}
-
-type PostRequestReturnType = ValidationReturnSuccess | ValidationReturnError
-
-export function validatePostRequest(email: string, password: string): PostRequestReturnType | string {
+export function validatePostRequest(email: string, password: string): zod.ZodSafeParseResult<{email: string, password: string}>  {
     const schema = zod.object({
         email: zod.email(),
         password: zod
@@ -38,13 +27,6 @@ export function validatePostRequest(email: string, password: string): PostReques
     };
 
     const result = schema.safeParse(requestParams);
-
-    return result.success
-        ? result
-        : result.error?.message
-        ? {
-              success: false,
-              message: JSON.parse(result.error.message)[0].message,
-          }
-        : result.error.message;
+    
+    return result;
 }

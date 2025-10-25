@@ -1,5 +1,5 @@
 import { type Request, type Response } from 'express';
-import { validatePostRequest } from '../utils/validation.util';
+import { validatePostRequest, type PostRequestReturnType } from '../utils/validation.util';
 
 function register(req: Request, res: Response) {
     if (!req.body || Object.entries(req.body).length === 0) {
@@ -11,9 +11,11 @@ function register(req: Request, res: Response) {
     const email = req.body.email;
     const password = req.body.password;
 
-    const validationResult = validatePostRequest(email, password);
+    const validationResult: PostRequestReturnType = validatePostRequest(email, password);
     
-    if (!validationResult)
+    if (!validationResult.success) {
+        
+    }
 }
 
 export { register };
