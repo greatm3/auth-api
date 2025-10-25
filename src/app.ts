@@ -1,4 +1,4 @@
-import express, { type Request, type Response } from 'express';
+import express from 'express';
 import cors from "cors"
 import { authRouter } from './routes/auth.route';
 import dotenv from 'dotenv'; 
