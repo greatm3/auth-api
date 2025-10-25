@@ -3,6 +3,6 @@ import { register } from '../controllers/auth.controller';
 
 const authRouter = Router();
 
-authRouter.get('/register', register);
+authRouter.post('/register', register);
 
 export { authRouter }

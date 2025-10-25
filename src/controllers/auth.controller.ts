@@ -1,10 +1,13 @@
 import { type Request, type Response } from 'express';
+import { validatePostRequest } from '../utils/validation.util';
 
 function register(req: Request, res: Response) {
-    res.status(200).json({
-        success: true,
-        message: 'registration successful',
-    });
+    if (!req.body.email || !req.body.password) {
+        return res.status(400).json({
+            success: false,
+            error: 'Email and Password are required',
+        });
+    }
 }
 
-export { register }
+export { register };
