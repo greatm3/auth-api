@@ -1,6 +1,18 @@
 import * as zod from 'zod';
 
-export function validatePostRequest(email: string, password: string) {
+interface ValidationReturnSuccess {
+    success: true
+    data: Record<string, unknown>
+}
+
+interface ValidationReturnError {
+    success: false
+    message: string
+}
+
+type PostRequestReturnType = ValidationReturnSuccess | ValidationReturnError
+
+export function validatePostRequest(email: string, password: string): PostRequestReturnType | string {
     const schema = zod.object({
         email: zod.email(),
         password: zod
