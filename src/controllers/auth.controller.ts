@@ -5,7 +5,7 @@ function register(req: Request, res: Response) {
     if (!req.body || Object.entries(req.body).length === 0) {
         return res
             .status(400)
-            .json({ success: false, error: 'Empty request body' });
+            .json({ success: false, error: 'Email and password are required' });
     }
 
     const email = req.body.email;
@@ -18,7 +18,7 @@ function register(req: Request, res: Response) {
             success: false,
             error: JSON.parse(validationResult.error.message)[0].message,
         };
-        return res.status(400).json(response);
+        return res.status(422).json(response);
     }
 
     const response = {
