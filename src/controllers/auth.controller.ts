@@ -1,5 +1,5 @@
 import { type Request, type Response } from 'express';
-import { validatePostRequest, type PostRequestReturnType } from '../utils/validation.util';
+import { validatePostRequest } from '../utils/validation.util';
 
 function register(req: Request, res: Response) {
     if (!req.body || Object.entries(req.body).length === 0) {
@@ -11,11 +11,29 @@ function register(req: Request, res: Response) {
     const email = req.body.email;
     const password = req.body.password;
 
-    const validationResult: PostRequestReturnType = validatePostRequest(email, password);
-    
+    const validationResult = validatePostRequest(email, password);
+
     if (!validationResult.success) {
-        
+        const response = {
+            success: false,
+            error: JSON.parse(validationResult.error.message)[0].message,
+        };
+        return res.status(400).json(response);
     }
+
+    const response = {
+        success: true,
+        message: 'User registered succes',
+        data: {
+            user: {
+                id: 1,
+                email: validationResult.data.email,
+                created_at: new Date().toISOString(),
+            },
+        },
+    };
+
+    res.status(201).json(response);
 }
 
 export { register };
