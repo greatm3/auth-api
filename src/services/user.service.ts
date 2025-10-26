@@ -1,6 +1,6 @@
 import appPool from '../db';
 
-export class Users {
+export class UserService {
     constructor() {}
     async name(params: string) {}
 }
