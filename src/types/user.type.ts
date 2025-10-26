@@ -4,8 +4,8 @@ export interface User {
     created_at: string;
 }
 
-export interface UserService<T> {
-    findAll(): Promise<T[]>,
+export interface UserServiceType<T> {
+    findAll(): Promise<T[] | Error | undefined>,
     findById(): Promise<T | null>,
     findByEmail(): Promise<T | null>,
     createUser(email: string, hashedPassword: string): Promise<T | null>,
