@@ -9,5 +9,5 @@ export interface UserServiceType<T> {
     findById(id: number): Promise<T | undefined>,
     findByEmail(email: string): Promise<T | undefined>,
     createUser(email: string, hashedPassword: string): Promise<undefined>,
-    deleteUser(email: string): Promise<T | undefined>
+    // deleteUser(email: string): Promise<T | undefined>
 }
