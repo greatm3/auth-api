@@ -39,4 +39,13 @@ export class UserService implements UserServiceType<User> {
             }
         }
     }
+
+    async createUser(email: string, hashedPassword: string): Promise<undefined> {
+        try {
+            const duplicateUser = await this.findByEmail(email);
+            if (!duplicateUser) {
+
+            }
+        }
+    }
 }
