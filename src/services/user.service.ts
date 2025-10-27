@@ -71,4 +71,15 @@ export class UserService implements UserServiceType<User> {
             }
         }
     }
+
+    async deleteUser(email: string): Promise<undefined> {
+        try {
+            await this.db.query('DELETE FROM users WHERE email = $1', [email])
+        } catch (err) {
+            if (err instanceof Error) {
+                console.error(err.stack)
+                throw new Error('Cannot delete user')
+            }
+        }
+    }
 }
