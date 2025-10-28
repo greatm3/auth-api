@@ -3,7 +3,6 @@ import { validatePostRequest } from '../utils/validation.util';
 import { hashPassword, verifyHash } from '../utils/hash.util';
 import { UserService } from '../services/user.service';
 import appPool from '../db';
-import { success } from 'zod';
 import { generateToken } from '../utils/jwt.util';
 
 const userService = new UserService(appPool);
@@ -93,7 +92,7 @@ export async function login(req: Request, res: Response, next: NextFunction) {
         );
 
         if (isPasswordVerified instanceof Error) {
-            return next(isPasswordVerified)
+            return next(isPasswordVerified);
         }
 
         if (!isPasswordVerified) {
@@ -136,5 +135,9 @@ export async function login(req: Request, res: Response, next: NextFunction) {
 }
 
 export async function profile(req: Request, res: Response, next: NextFunction) {
+    if (req.headers['authorization']) {
+        const authToken = req.headers['authorization'].split(' ');
 
+        return res.status(200).json({ token: authToken[1] });
+    }
 }
