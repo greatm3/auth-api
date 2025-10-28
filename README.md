@@ -19,15 +19,15 @@ npm install
 - create a `.env` file
 - template `.env.example`
 ```env
-APP_PORT=9089
-DATABASE_HOST=localhost
-DATABASE_PORT=5432
-DATABASE_NAME=auth_api
-DATABASE_USERNAME=postgres
-DATABASE_PASSWORD=postgresql
+PORT=9089
+PGHOST=localhost
+PGDATABASE=auth_api
+PGUSER=postgres
+PGPASSWORD=postgresql
+PGPORT=7887
 NODE_ENV=development
 
-JWT_SIGN_KEY=c10b8002b6f42b1032aaeaa17957baf52e408f6793c3e91cdf6
+JWT_SIGN_KEY=08f7fb39dd153e7cae1036793002b6fbb96cb16553af2e21853e65b42bc3e91c52aa17957baf52e408f6df88e0ab46fb3fd711040cef7d902b88d442aaec10b8
 ```
 
 ### run in development mode
