@@ -57,7 +57,7 @@ npm run start
 ```sh
 
 curl -X POST http://localhost:3000/api/auth/register \
-    -H "Cotent-Type: application/json" \
+    -H "Content-Type: application/json" \
     -d '{"email":"test@test.test", "password":"Skijkhah99@#"}'
 ```
 
@@ -65,7 +65,7 @@ curl -X POST http://localhost:3000/api/auth/register \
 ```sh
 
 curl -X POST http://localhost:3000/api/auth/login \
-    -H "Cotent-Type: application/json" \
+    -H "Content-Type: application/json" \
     -d '{"email":"test@test.test", "password":"Skijkhah99@#"}'
 ```
 
@@ -75,3 +75,77 @@ curl -X POST http://localhost:3000/api/auth/login \
 curl -X GET http://localhost:3000/api/auth/profile \
     -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzYxNjc0MjUwLCJleHAiOjE3NjE3NjA2NTB9.nstHLlvxLbREIjheQrd7F635JEd4ztHQG7Rl936dtts"
 ```
+
+## responses
+
+- on successful registration request, the response will be:
+```json
+{
+    "success": true,
+    "message": "User registered successfully",
+    "data": {
+        "user": {
+            "id": 1,
+            "email": "user@example.com",
+            "created_at": "2025-10-21T15:30:00.000Z"
+        }
+    }
+}
+
+```
+- login 
+```json
+{
+    "success": true,
+    "message": "Login successful",
+    "data": {
+        "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImVtYWlsIjoidXNlckBleGFtcGxlLmNvbSIsImlhdCI6MTYzNDgyNDAwMCwiZXhwIjoxNjM0OT",
+        "user": {
+            "id": 1,
+            "email": "user@example.com"
+        }
+    }
+}
+```
+- profile
+```json
+{
+    "success": true,
+    "data": {
+        "user": {
+            "id": 1,
+            "email": "user@example.com",
+            "created_at": "2025-10-21T15:30:00.000Z"
+        }
+    }
+}
+```
+
+All error responses are in this format
+```json
+{ "success": false, "error": "error message" }
+
+```
+
+## status codes 
+
+### Success codes
+| **Status Code** | **Message / Meaning** | **Example Response Message** |
+|------------------|------------------------|-------------------------------|
+| **200 OK** | Request successful | `"Login successful"`, `"Profile retrieved successfully"` |
+| **201 Created** | Resource successfully created | `"User registered successfully"`, `"Account created"` |
+| **204 No Content** | Action successful, no body returned | Used for logout or token revocation |
+
+---
+
+### Error Responses
+
+| **Status Code** | **When It Happens** | **Example Error Message** |
+|------------------|----------------------|-----------------------------|
+| **400 Bad Request** | Missing or invalid fields | `"Email and password are required"` |
+| **401 Unauthorized** | No token / invalid or expired token | `"Invalid token"`, `"Token expired"`, `"Invalid credentials"` |
+| **403 Forbidden** | User lacks permission | `"Access denied"` |
+| **404 Not Found** | Resource does not exist | `"User not found"`, `"Resource not found"` |
+| **409 Conflict** | Duplicate or conflicting data | `"User with this email already exists"` |
+| **422 Unprocessable Entity** | Validation failed | `"Invalid email format"`, `"Password too weak"` |
+| **500 Internal Server Error** | Unexpected backend error | `"Internal server error"` |
