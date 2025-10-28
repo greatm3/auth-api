@@ -92,6 +92,10 @@ export async function login(req: Request, res: Response, next: NextFunction) {
             password
         );
 
+        if (isPasswordVerified instanceof Error) {
+            return next(isPasswordVerified)
+        }
+
         if (!isPasswordVerified) {
             const response = {
                 success: false,
@@ -129,4 +133,8 @@ export async function login(req: Request, res: Response, next: NextFunction) {
         };
         return res.status(401).json(response);
     }
+}
+
+export async function profile(req: Request, res: Response, next: NextFunction) {
+
 }
