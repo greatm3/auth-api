@@ -1,5 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
-import { verifyToken } from '../utils/jwt.util';
+import { verifyToken } from '../utils/jwt.util'; 
+
 
 export async function authenticate(
     req: Request,
@@ -19,7 +20,8 @@ export async function authenticate(
 
     try {
         const payload = await verifyToken(authToken);
-        return res.status(200).json(payload);
+        req.user = payload
+        next()
     } catch (err) {
         if (err instanceof Error) {
             if (err.name === 'JsonWebTokenError') {
