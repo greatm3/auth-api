@@ -6,7 +6,11 @@ import appPool from '../db';
 
 const userService = new UserService(appPool);
 
-async function register(req: Request, res: Response, next: NextFunction) {
+export async function register(
+    req: Request,
+    res: Response,
+    next: NextFunction
+) {
     if (!req.body || Object.entries(req.body).length === 0) {
         return res
             .status(400)
@@ -28,22 +32,36 @@ async function register(req: Request, res: Response, next: NextFunction) {
     const passwordHash = await hashPassword(password);
 
     if (passwordHash instanceof Error) {
-        return res
-            .status(500)
-            .json({ success: false, error: 'Internal server error' });
+        return next(passwordHash);
     }
 
     try {
         if (typeof passwordHash === 'string') {
             await userService.createUser(email, passwordHash);
         }
-        return res.status(201).json({
-            success: true,
-            message: 'Registration successful',
-        });
+
+        const newUser = await userService.findByEmail(email);
+        if (newUser) {
+            const response = {
+                success: true,
+                message: 'User registered succesfully',
+                data: {
+                    user: newUser,
+                },
+            };
+            return res.status(201).json(response);
+        }
     } catch (err) {
         next(err);
     }
 }
 
-export { register };
+export async function login(req: Request, res: Response, next: NextFunction) {
+    if (!req.body || Object.entries(req.body).length === 0) {
+        return res
+            .status(400)
+            .json({ success: false, error: 'Email and password are required' });
+    }
+
+    const { email, password } = req.body;
+}
