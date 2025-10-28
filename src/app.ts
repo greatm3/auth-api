@@ -3,9 +3,10 @@ import dotenv from 'dotenv';
 import cors from "cors"
 import { authRouter } from './routes/auth.route';
 import { errorHandler } from './middlewares/error_handler.middleware'
+import path from 'path';
 
 dotenv.config({
-    path: '.env',
+    path: path.resolve(__dirname, '.env'),
 });
 
 const app = express();
