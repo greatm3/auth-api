@@ -17,6 +17,6 @@ app.use('/api/auth', authRouter)
 
 app.use(errorHandler)
 
-app.listen(process.env.APP_PORT, () => {
+app.listen(process.env.APP_PORT || 3000, () => {
     console.log('app started @', process.env.APP_PORT);
 });
