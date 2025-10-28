@@ -1,9 +1,9 @@
-import { type Request, type Response, type NextFunction } from 'express';
+import { Request, Response, NextFunction } from 'express';
 import { validatePostRequest } from '../utils/validation.util';
 import { hashPassword, verifyHash } from '../utils/hash.util';
 import { UserService } from '../services/user.service';
 import appPool from '../db';
-import { generateToken } from '../utils/jwt.util';
+import { generateToken } from '../utils/jwt.util'; 
 
 const userService = new UserService(appPool);
 
@@ -135,9 +135,8 @@ export async function login(req: Request, res: Response, next: NextFunction) {
 }
 
 export async function profile(req: Request, res: Response, next: NextFunction) {
-    if (req.headers['authorization']) {
-        const authToken = req.headers['authorization'].split(' ');
-
-        return res.status(200).json({ token: authToken[1] });
+    if (req.user) {
+        return res.status(200).json(req.user)
     }
+    
 }
