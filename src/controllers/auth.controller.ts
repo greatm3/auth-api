@@ -64,4 +64,14 @@ export async function login(req: Request, res: Response, next: NextFunction) {
     }
 
     const { email, password } = req.body;
+
+    const validationResult = validatePostRequest(email, password);
+
+    if (!validationResult.success) {
+        const response = {
+            success: false,
+            error: 'Invalid credentials',
+        };
+        return res.status(422).json(response);
+    }
 }
