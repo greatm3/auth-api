@@ -15,7 +15,7 @@ export async function hashPassword(password: string) : Promise<string | Error | 
 
 export async function verifyHash(hash: string, password: string) {
     try {
-        const verified = await bcrypt.compare(hash, password);
+        const verified = await bcrypt.compare(password, hash);
         return verified
     } catch (err) {
         if (err instanceof Error) {
