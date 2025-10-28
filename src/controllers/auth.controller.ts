@@ -3,7 +3,7 @@ import { validatePostRequest } from '../utils/validation.util';
 import { hashPassword, verifyHash } from '../utils/hash.util';
 import { UserService } from '../services/user.service';
 import appPool from '../db';
-import { generateToken } from '../utils/jwt.util'; 
+import { generateToken } from '../utils/jwt.util';
 
 const userService = new UserService(appPool);
 
@@ -135,8 +135,31 @@ export async function login(req: Request, res: Response, next: NextFunction) {
 }
 
 export async function profile(req: Request, res: Response, next: NextFunction) {
-    if (req.user) {
-        return res.status(200).json(req.user)
+    if (req.user && typeof req.user !== 'string') {
+        const { email } = req.user;
+        if (email && typeof email === 'string') {
+            const user = await userService.findByEmail(email);
+
+            if (!user) {
+                const response = {
+                    success: false,
+                    error: 'User not found',
+                };
+                return res.status(404).json(response);
+            }
+
+            const response = {
+                success: true,
+                data: {
+                    user: {
+                        id: user.id,
+                        email: user.email,
+                        created_at: user.created_at,
+                    },
+                },
+            };
+
+            return res.status(200).json(response);
+        }
     }
-    
 }
