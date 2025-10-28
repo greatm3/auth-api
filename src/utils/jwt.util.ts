@@ -29,8 +29,15 @@ export async function verifyToken(token: string) {
         }
     } catch (err) {
         if (err instanceof Error) {
-            console.error(err.stack);
-            throw err;
+            if (
+                err.name === 'JsonWebTokenError' ||
+                err.name === 'TokenExpiredError'
+            ) {
+                throw err;
+            } else {
+                console.error(err.stack);
+                throw err;
+            }
         }
     }
 }
