@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "nodemon src/app.ts",
     "build": "tsc",
-    "start": "node dist/app.js",
+    "start": "node dist/db.js",
     "migrate:ts": "ts-node src/scripts/migrate.ts",
     "migrate:js": "node dist/db.js"
   },
