@@ -8,11 +8,7 @@ dotenv.config({
 }) 
 
 const dbConfig: PoolConfig = {
-    host: process.env.PGHOST,
-    port: Number(process.env.PGPORT) || 5432,
-    user: process.env.PGUSER,
-    password: process.env.PGPASSWORD,
-    database: process.env.PGDATABASE
+    connectionString: process.env.DATABASE_URL
 }
 
 const appPool = new Pool(dbConfig) 
