@@ -9,13 +9,10 @@ dotenv.config({
 
 console.log(process.env.DATABASE_URL)
 
-// const dbConfig: PoolConfig = {
-//     connectionString: process.env.DATABASE_URL,
-//     ssl: {
-//         rejectUnauthorized: false
-//     }
-// }
+const dbConfig: PoolConfig = {
+    connectionString: process.env.DATABASE_URL
+}
 
-// const appPool = new Pool(dbConfig) 
+const appPool = new Pool(dbConfig) 
 
-// export default appPool
+export default appPool
