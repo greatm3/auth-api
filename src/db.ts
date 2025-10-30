@@ -5,9 +5,7 @@ import path from "path"
 
 dotenv.config({
     path: path.resolve(__dirname, '../.env')
-}) 
-
-console.log(process.env.DATABASE_URL)
+})
 
 const dbConfig: PoolConfig = {
     connectionString: process.env.DATABASE_URL

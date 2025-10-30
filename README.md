@@ -20,12 +20,7 @@ npm install
 - template `.env.example`
 ```env
 PORT=9089
-PGHOST=localhost
-PGDATABASE=auth_api
-PGUSER=postgres
-PGPASSWORD=postgresql
-PGPORT=7887
-NODE_ENV=development
+DATABASE_URL=postgresql://postgres:postgresql@localhost:5432/auth_api
 
 JWT_SIGN_KEY=08f7fb39dd153e7cae1036793002b6fbb96cb16553af2e21853e65b42bc3e91c52aa17957baf52e408f6df88e0ab46fb3fd711040cef7d902b88d442aaec10b8
 ```
